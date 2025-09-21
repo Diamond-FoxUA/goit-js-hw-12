@@ -10,6 +10,7 @@ import "izitoast/dist/css/iziToast.min.css";
 
 const formEl = document.querySelector('.form');
 const formInputEl = formEl.querySelector('input');
+const formBtnEl = document.querySelector('.form-btn');
 
 const galleryEl = document.querySelector('.gallery');
 
@@ -17,6 +18,7 @@ formEl.addEventListener('submit', handleSubmit);
 
 function handleSubmit(event) {
   event.preventDefault();
+  formBtnEl.disabled = true;
   
   const userSearch = formInputEl.value.trim();
   if(!userSearch) return;
@@ -32,10 +34,12 @@ function handleSubmit(event) {
           message: "Sorry, there are no images matching your search query. Please try again!",
           position: "topRight"
         })
+        formBtnEl.disabled = false;
         return;
       }
       createGallery(images.hits, galleryEl);
       hideLoader();
+      formBtnEl.disabled = false;
     })
     .catch(error => {
       console.log(error);
