@@ -41,6 +41,11 @@ export function createGallery(images, galleryEl) {
   } else {
     lightbox.refresh();
   }
+
+  if (galleryEl.children.length === 1) {
+      galleryEl.children[0].style.width = '360px';
+      // Якщо зображення лиш одне, то розмір картки не зламається.
+    }
 };
 
 export function clearGallery(galleryEl) {
